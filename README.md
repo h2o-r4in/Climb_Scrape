@@ -6,7 +6,7 @@ A status page for climbers notifying when national parks reopen from the COVID19
 # Requirements
 ```
 pip install scrapy
-pip install flask
+pip install flask flask-cors
 ```
 
 # How to run
