@@ -33,7 +33,30 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
     <div class="w3-quarter">
       <img src="images/minnewaska.jpeg" alt="minenewaska" style="width:100%; height: 250px">
       <h3>Minnewaska</h3>
-      <p>Status:</p>
+      <p> Status:</p>
+      <p id="minnewaska-status">Status:</p> 
+      <script type="text/javascript">
+        var HttpClient = function() {
+          this.get = function(aUrl, aCallback) {
+          var anHttpRequest = new XMLHttpRequest();
+          anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+          }
+
+          anHttpRequest.open( "GET", aUrl, true );            
+          anHttpRequest.send( null );
+          }
+        }
+        var client = new HttpClient();
+        client.get('http://127.0.0.1:5000/minnewaska', function(response) {
+          element=document.getElementById("minnewaska-status");
+          element.textContent=response;
+          //debugger;
+        });
+      </script>
+
+  
     </div>
     <div class="w3-quarter">
       <img src="images/gunks.jpeg" alt="Shawangunks" style="width:100%; height:250px">

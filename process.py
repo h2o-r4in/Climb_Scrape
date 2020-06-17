@@ -4,8 +4,10 @@ import json
 from os import listdir
 from os.path import isfile, join
 from flask import Flask
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 
 def getjsonfiles(): 
@@ -22,10 +24,10 @@ def minnewaska_is_open(text):
 	else:
 		return False
 
-@app.route('/statuses')
+@app.route('/minnewaska')
 def get_statuses():
 	# returns dictionary of placename: status
-	statuses = {}
+	statuses = ""
 	for jsonfile in getjsonfiles():
 		placename, fileformat = jsonfile.split(".")
 
@@ -37,9 +39,9 @@ def get_statuses():
 				for element in data:
 					print("minnewaska open?")
 					if minnewaska_is_open(element["text"]):
-						statuses[placename] = "Yes"
+						statuses = "Yes"
 					else:
-						statuses[placename] = "No!"
+						statuses = "No!"
 
 
 	return statuses
